@@ -81,8 +81,8 @@ Press Add and add a folder that has the following folder structure:
     * misc
   * dict
   * tex
-    *latex
-      *misc
+    * latex
+      * misc
 
 Put the following files into the subfolder: _Local Tex Files/tex/latex/misc_
 
