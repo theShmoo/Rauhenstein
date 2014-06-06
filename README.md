@@ -10,15 +10,15 @@ Creating a local package repository :
 
 Press Add and add a folder that has the following folder structure:
 * Local Tex Files
-.* bibtex
-..* bib
-...* misc
-..* bst
-...* misc
-.* dict
-.* tex
-..*latex
-...*misc
+  * bibtex
+    * bib
+      * misc
+  * bst
+    * misc
+  * dict
+  * tex
+    *latex
+      *misc
 
 Put the following files into the subfolder: _Local Tex Files/tex/latex/misc_
 
