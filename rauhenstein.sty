@@ -1,0 +1,461 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{rauhenstein}[2013/02/11 Rauhenstein package]
+
+%%%% Encoding packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Define an error message
+%\def\rauhenstein@stop{\PackageError{rauhenstein}
+  %{`inputenc' or `inputenx' loaded with wrong option.\MessageBreak
+   %This is a fatal error}
+  %{This package won't work if either `inputenc' or `inputenx'\MessageBreak
+   %are loaded with the `utf8' option. The LaTeX run will be terminated}%
+   %\fi\@@end} % the `\fi` is to match `\if@tempswa`
+%% Check for inputenx or inputenc
+%\@tempswafalse
+%\@ifpackageloaded{inputenx}
+  %{\def\rauhenstein@tempa{inputenx}\@tempswatrue}
+  %{\@ifpackageloaded{inputenc}
+    %{\def\rauhenstein@tempa{inputenc}\@tempswatrue}
+    %{\RequirePackage[utf8]{inputenc}}%
+  %}
+%% Check for the right option
+%\if@tempswa
+%\@ifpackagewith{\rauhenstein@tempa}{utf8}{}{\rauhenstein@stop}
+%\@ifpackagewith{\rauhenstein@tempa}{utf8x}{\rauhenstein@stop}{}
+%\fi
+
+%%% Other packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[ngerman]{babel}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{comment}
+\RequirePackage[usenames,dvipsnames]{xcolor}
+\RequirePackage{epsfig}
+\RequirePackage{ifthen}
+\RequirePackage{url}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{fullpage}
+\RequirePackage{multirow}
+\RequirePackage{eurosym}
+\RequirePackage{graphicx}
+\RequirePackage{caption}
+\RequirePackage{subcaption}
+\RequirePackage{lmodern}
+
+%%% Zitieren %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage[fixlanguage]{babelbib} % für das Erstellen des Bibtex-Literaturverzeichnisses
+	%\selectbiblanguage{english}
+	\selectbiblanguage{german}
+\RequirePackage{cite}
+
+
+%%% Pagestyles %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{fancyhdr}
+
+\pagestyle{fancy} %eigener Seitenstil
+\setlength{\voffset}{-2cm}
+\setlength{\headheight}{2cm}
+\setlength{\headsep}{28pt}
+\lhead{\epsfig{file=rauhenstein-bg.eps, width=1cm}} %Kopfzeile links
+
+%%% HYPERREF %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage{hyperref}
+
+\definecolor{darkgreen}{rgb}{0,0.5,0} 
+
+  \hypersetup{
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=false,        % show Acrobat’s toolbar?
+    pdfmenubar=false,        % show Acrobat’s menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={Planung Trupp Rauhenstein},    % title
+    pdfauthor={David Pfahler},     % author
+    pdfsubject={Pfadfinder und Pfadfinderinnen},   % subject of the document
+    pdfcreator={David Pfahler},   % creator of the document
+    pdfproducer={David Pfahler}, % producer of the document
+    pdfkeywords={Pfadfinder und Pfadfinderinnen} {GuSp} {Rauhenstein}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+		pdfborder={0 0 0} 			% no borders
+}
+
+%%% Counters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcounter{ueenumi}
+\renewcommand{\theueenumi}{\alph{ueenumi}}
+
+%%% Internal commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Planung %%
+
+\newcommand{\@planung}{
+	\vspace*{-2cm}
+	\begin{minipage}{2.2cm}
+		\epsfig{file=rauhenstein.eps, width=1.9cm}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{10cm}
+		\begin{center}
+			\sf
+			\smallskip Pfadfinder und Pfadfinderinnen Österreichs \par
+			\smallskip Niederösterreichischen Pfadfinder und Pfadfinderinnen \par
+			\smallskip Badener Pfadfinder und Pfadfinderinnen 
+		\end{center}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{2.2cm}
+		\hfill
+		\epsfig{file=gusp.eps, width=1.9cm}
+	\end{minipage}
+
+	\begin{center}
+		{
+			\large\sf\bfseries
+			Guides \& Späher Trupp Rauhenstein
+		}\\[2cm]
+		{ \large
+		\ifthenelse{\isundefined{\@untertitel}}
+		{
+			Planung zur
+		}{
+			\@untertitel
+		}
+		}\\[0.3cm]
+		{ 
+			\huge \bfseries
+			\@thema
+		}\\[0.5cm]
+		{ \Large 
+			Am \@durchfuehrungsdatum \ \@ort 
+		}
+		\\[2.2cm]
+			\ifthenelse{\isundefined{\@planende}}
+				{
+				\begin{minipage}[t]{0.4\textwidth}
+				\begin{flushleft} \large
+				\emph{Die Planung war am:}\\
+				\@planungsdatum
+				\ifthenelse{\isundefined{\@planungsort}}
+					{}{\ \@planungsort}
+				\end{flushleft}
+				\end{minipage}
+				\ifthenelse{\isundefined{\@schreiber}}
+				{}{
+				\begin{minipage}[t]{0.4\textwidth}
+				\begin{flushright} \large
+					\emph{Protokollführer:}\\
+					\@schreiber
+				\end{flushright}
+				\end{minipage}
+				}
+				}{
+			\begin{minipage}[t]{0.4\textwidth}
+			\begin{flushleft} \large
+				\emph{Anwesend bei der Planung:}\\
+				\@planende
+				
+			\end{flushleft}
+			\end{minipage}
+			\ifthenelse{\isundefined{\@schreiber}}{
+				\begin{minipage}[t]{0.4\textwidth}
+				\begin{flushright} \large
+					\emph{Die Planung war am:}\\
+					\@planungsdatum
+					\ifthenelse{\isundefined{\@planungsort}}
+						{}{\ \@planungsort}
+				\end{flushright}
+				\end{minipage}
+			}
+			{
+				\begin{minipage}[t]{0.4\textwidth}
+				\begin{flushright} \large
+					\emph{Die Planung war am:}\\
+					\@planungsdatum
+					\ifthenelse{\isundefined{\@planungsort}}
+						{}{\ \@planungsort}
+						\\[1cm]
+					\emph{Protokollführer:}\\
+					\@schreiber
+				\end{flushright}
+				\end{minipage}
+			}
+			}
+		%\\[2.2cm]
+		%\begin{minipage}{0.8\textwidth}
+		%\begin{flushleft} \large
+			%\emph{Die Planung war am:}\\
+			%\@planungsdatum
+			%\ifthenelse{\isundefined{\@planungsort}}
+				%{}{\ \@planungsort}
+			%\ifthenelse{\isundefined{\@planende}}
+				%{}{
+			%\\[0.4cm]
+			%\emph{Anwesend bei der Planung:}\\
+			%\@planende
+			%}
+			%\ifthenelse{\isundefined{\@schreiber}}
+				%{}{
+				%\\[0.4cm]
+				%\emph{Protokollführer:}\\
+				%\@schreiber
+				%}
+		%\end{flushleft}
+		%\end{minipage}
+		\ifthenelse{\isundefined{\@foto}}
+				{}{\\[2cm] \epsfig{file=\@foto, height=5cm}}
+	\end{center}
+
+	\clearpage
+}
+
+%% kurzes Protokoll %%
+
+\newcommand{\@kurzesprotokoll}{
+	\vspace*{-2cm}
+	\begin{minipage}{2.2cm}
+		\epsfig{file=rauhenstein.eps, width=1.9cm}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{10cm}
+		\begin{center}
+			\sf
+			\smallskip Trupp Rauhenstein \par
+		\end{center}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{2.2cm}
+		\hfill
+		\epsfig{file=gusp.eps, width=1.9cm}
+	\end{minipage}
+
+	\begin{center}
+		{ 
+			\huge \bfseries
+			Protokoll vom \@durchfuehrungsdatum
+		}		
+		\\[1.7cm]
+			\ifthenelse{\isundefined{\@planende}}
+				{
+				\ifthenelse{\isundefined{\@schreiber}}
+				{}{
+				\begin{minipage}[t]{0.8\textwidth}
+				\begin{flushleft} \large
+					\emph{Protokollführer:}\\
+					\@schreiber
+				\end{flushleft}
+				\end{minipage}
+				}
+				}{
+			\begin{minipage}[t]{0.4\textwidth}
+			\begin{flushleft} \large
+				\emph{Anwesend bei der Planung:}\\
+				\@planende
+			\end{flushleft}
+			\end{minipage}
+			\ifthenelse{\isundefined{\@schreiber}}{}
+			{
+				\begin{minipage}[t]{0.4\textwidth}
+				\begin{flushright} \large
+					\emph{Protokollführer:}\\
+					\@schreiber
+				\end{flushright}
+				\end{minipage}
+			}
+			}
+			
+		
+	\end{center}
+}
+
+%% Besichtigung %%
+
+\newcommand{\@besichtigung}{
+	\vspace*{-2cm}
+	\begin{minipage}{2.2cm}
+		\epsfig{file=rauhenstein.eps, width=1.9cm}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{10cm}
+		\begin{center}
+			\sf
+			\smallskip Pfadfinder und Pfadfinderinnen Österreichs \par
+			\smallskip Niederösterreichischen Pfadfinder und Pfadfinderinnen \par
+			\smallskip Badener Pfadfinder und Pfadfinderinnen 
+		\end{center}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{2.2cm}
+		\hfill
+		\epsfig{file=gusp.eps, width=1.9cm}
+	\end{minipage}
+
+	\begin{center}
+		{
+			\large\sf\bfseries
+			Guides \& Späher Trupp Rauhenstein
+		}\\[1.4cm]
+		{ 
+			\huge \bfseries
+			Besichtigung \emph{\@ort} 
+		}\\
+		{	
+			\Large \bfseries 
+			am \@durchfuehrungsdatum	
+		}
+		\\[1.7cm]
+			\ifthenelse{\isundefined{\@planende}}
+				{
+				\ifthenelse{\isundefined{\@schreiber}}
+				{}{
+				\begin{minipage}[t]{0.8\textwidth}
+				\begin{flushleft}
+					\emph{Protokollführer:}\\
+					\@schreiber
+				\end{flushleft}
+				\end{minipage}
+				}
+				}{
+			\begin{minipage}[t]{0.4\textwidth}
+			\begin{flushleft}
+				\emph{Anwesend bei der Besichtigung:}\\
+				\@planende
+			\end{flushleft}
+			\end{minipage}
+			\ifthenelse{\isundefined{\@schreiber}}{}
+			{
+				\begin{minipage}[t]{0.4\textwidth}
+				\begin{flushright}
+					\emph{Protokollführer:}\\
+					\@schreiber
+				\end{flushright}
+				\end{minipage}
+			}
+			}
+			
+		
+	\end{center}
+}
+
+%% Time %%%
+
+%TODO
+
+
+
+%%% Environments %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{myenum}{%
+	\begin{list}{(\theueenumi)}{
+		\usecounter{ueenumi}
+		\setlength{\topsep}{0mm}
+		\setlength{\partopsep}{0mm}
+		\setlength{\itemsep}{0mm}
+		\setlength{\leftmargin}{8mm}
+		\setlength{\labelwidth}{6mm}
+		\setlength{\labelsep}{2mm}
+		\renewcommand{\makelabel}[1]{##1\hfill}
+	}
+}{%
+	\end{list}
+}
+
+\newenvironment{myitem}{%
+	\begin{list}{}{
+		\setlength{\topsep}{0mm}
+		\setlength{\partopsep}{0mm}
+		\setlength{\itemsep}{0mm}
+		\setlength{\leftmargin}{8mm}
+		\setlength{\labelwidth}{6mm}
+		\setlength{\labelsep}{2mm}
+		\renewcommand{\makelabel}[1]{\hfill $\bullet$}
+	}
+}{%
+	\end{list}
+}
+
+%%% Options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclareOption{planung}{
+	\newcommand{\untertitel}[1]{\providecommand{\@untertitel}{#1}}
+	\newcommand{\thema}[1]{\providecommand{\@thema}{#1}}
+	\AtBeginDocument{
+	\ifthenelse{\isundefined{\@thema}}{%
+		\PackageError{rauhenstein}{thema not defined!}{FIXME: helptext}}{}
+	}
+	\providecommand{\rauhenstein}{\@planung}
+}
+
+\DeclareOption{heimstunde}{
+	\newcommand{\untertitel}[1]{\providecommand{\@untertitel}{#1}}
+	\newcommand{\thema}[1]{\providecommand{\@thema}{#1}}
+	\AtBeginDocument{
+	\ifthenelse{\isundefined{\@thema}}{%
+		\PackageError{rauhenstein}{thema not defined!}{FIXME: helptext}}{}
+	}
+	\providecommand{\rauhenstein}{\@heimstunde}
+}
+
+\DeclareOption{kurzesprotokoll}{
+	\providecommand{\rauhenstein}{\@kurzesprotokoll}
+}
+
+\DeclareOption{besichtigung}{
+	\providecommand{\rauhenstein}{\@besichtigung}
+}
+
+\ProcessOptions\relax
+
+%%% Logos %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\IfFileExists{rauhenstein.eps}{%
+	\typeout{File found: rauhenstein.eps}
+}{%
+	\PackageError{rauhenstein}{File NOT found: rauhenstein.eps}{FIXME: Help text}
+}
+
+\IfFileExists{rauhenstein-bg.eps}{%
+	\typeout{File found: rauhenstein-bg.eps}
+}{%
+	\PackageError{rauhenstein}{File NOT found: rauhenstein-bg.eps}{FIXME: Help text}
+}
+
+\IfFileExists{gusp.eps}{%
+	\typeout{File found: gusp.eps}
+}{%
+	\PackageError{rauhenstein}{File NOT found: gusp.eps}{FIXME: Help text}
+}
+
+%%% Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand{\planungsdatum}[1]{\providecommand{\@planungsdatum}{#1}}
+\newcommand{\durchfuehrungsdatum}[1]{\providecommand{\@durchfuehrungsdatum}{#1}}
+\newcommand{\ort}[1]{\providecommand{\@ort}{#1}}
+\newcommand{\planende}[1]{\providecommand{\@planende}{#1}}
+\newcommand{\planungsort}[1]{\providecommand{\@planungsort}{#1}}
+\newcommand{\schreiber}[1]{\providecommand{\@schreiber}{#1}}
+\newcommand{\foto}[1]{\providecommand{\@foto}{#1}}
+
+
+% Check if the above commands are all executed in the preamble.
+\AtBeginDocument{
+	\ifthenelse{\isundefined{\@planungsdatum}}{%
+		\PackageError{rauhenstein}{planungsdatum not defined!}{FIXME: helptext}}{}
+	\ifthenelse{\isundefined{\@durchfuehrungsdatum}}{%
+	\providecommand{\@durchfuehrungsdatum}{\@planungsdatum}}{}
+	\ifthenelse{\isundefined{\@ort}}{%
+		\PackageError{rauhenstein}{ort not defined!}{FIXME: helptext}}{}
+} % AtBeginDocument
+
+
+%%% Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\sloppy
+\setlength{\parindent}{0mm}
+\setlength{\parskip}{1.5ex plus 0.5ex minus 0.5ex}
+
+\thispagestyle{empty}
