@@ -1,27 +1,12 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{rauhenstein}[2013/02/11 Rauhenstein package]
 
-%%%% Encoding packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Define an error message
-%\def\rauhenstein@stop{\PackageError{rauhenstein}
-  %{`inputenc' or `inputenx' loaded with wrong option.\MessageBreak
-   %This is a fatal error}
-  %{This package won't work if either `inputenc' or `inputenx'\MessageBreak
-   %are loaded with the `utf8' option. The LaTeX run will be terminated}%
-   %\fi\@@end} % the `\fi` is to match `\if@tempswa`
-%% Check for inputenx or inputenc
-%\@tempswafalse
-%\@ifpackageloaded{inputenx}
-  %{\def\rauhenstein@tempa{inputenx}\@tempswatrue}
-  %{\@ifpackageloaded{inputenc}
-    %{\def\rauhenstein@tempa{inputenc}\@tempswatrue}
-    %{\RequirePackage[utf8]{inputenc}}%
-  %}
-%% Check for the right option
-%\if@tempswa
-%\@ifpackagewith{\rauhenstein@tempa}{utf8}{}{\rauhenstein@stop}
-%\@ifpackagewith{\rauhenstein@tempa}{utf8x}{\rauhenstein@stop}{}
-%\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	@file rauhenstein.sty
+%	@author David Pfahler (1126287) <e1126287@student.tuwien.ac.at>
+%	@compile LaTeX -> PS -> PDF
+% If something doesn't work feel free to write me a mail
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%% Other packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -382,6 +367,7 @@
 \DeclareOption{planung}{
 	\newcommand{\untertitel}[1]{\providecommand{\@untertitel}{#1}}
 	\newcommand{\thema}[1]{\providecommand{\@thema}{#1}}
+	\newcommand{\foto}[1]{\providecommand{\@foto}{#1}}
 	\AtBeginDocument{
 	\ifthenelse{\isundefined{\@thema}}{%
 		\PackageError{rauhenstein}{thema not defined!}{FIXME: helptext}}{}
@@ -389,15 +375,6 @@
 	\providecommand{\rauhenstein}{\@planung}
 }
 
-\DeclareOption{heimstunde}{
-	\newcommand{\untertitel}[1]{\providecommand{\@untertitel}{#1}}
-	\newcommand{\thema}[1]{\providecommand{\@thema}{#1}}
-	\AtBeginDocument{
-	\ifthenelse{\isundefined{\@thema}}{%
-		\PackageError{rauhenstein}{thema not defined!}{FIXME: helptext}}{}
-	}
-	\providecommand{\rauhenstein}{\@heimstunde}
-}
 
 \DeclareOption{kurzesprotokoll}{
 	\providecommand{\rauhenstein}{\@kurzesprotokoll}
@@ -438,7 +415,6 @@
 \newcommand{\planende}[1]{\providecommand{\@planende}{#1}}
 \newcommand{\planungsort}[1]{\providecommand{\@planungsort}{#1}}
 \newcommand{\schreiber}[1]{\providecommand{\@schreiber}{#1}}
-\newcommand{\foto}[1]{\providecommand{\@foto}{#1}}
 
 
 % Check if the above commands are all executed in the preamble.
