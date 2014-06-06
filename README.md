@@ -10,6 +10,8 @@ There are 3 possible styles for the startpage of a new document:
 
 ### Planung
 
+![Planung Example](https://raw.githubusercontent.com/theShmoo/Rauhenstein/master/examples/planung.png)
+
 __Example:__
 ```TeX
 \documentclass[a4paper, 12pt]{article}
@@ -30,6 +32,8 @@ __Example:__
 
 ### Besichtigung
 
+![Besichtigung Example](https://raw.githubusercontent.com/theShmoo/Rauhenstein/master/examples/besichtigung.png)
+
 __Example:__
 ```TeX
 \documentclass[a4paper, 12pt]{article}
@@ -45,6 +49,8 @@ __Example:__
 ```
 
 ### Kurzes Protokoll
+
+![Kurzes Protokoll Example](https://raw.githubusercontent.com/theShmoo/Rauhenstein/master/examples/kurzes_protokoll.png)
 
 __Example:__
 ```TeX
