@@ -2,6 +2,62 @@
 
 This project is a style file for latex that helps to create beautiful plannings for scouting activities
 
+##Usage
+
+There are 3 possible style for the startpage of a new document:
+
+### Planung
+
+__Example:__
+```TeX
+\documentclass[a4paper, 12pt]{article}
+\usepackage[planung]{rauhenstein}
+\usepackage{blindtext}
+\planungsdatum{28.11.2013}			%required
+\ort{im Heim}						%required
+\thema{Patrullenrat Heimstunde}		%required
+\durchfuehrungsdatum{28.11.2013}	%optional
+\untertitel{Reflexion zur}			%optional
+\schreiber{David}					%optional
+\planende{Jakob, Lisi}				%optional
+\planungsort{Jakobs Hood}			%optional
+\foto{rauhenstein}					%optional
+\begin{document}
+\rauhenstein
+```
+
+### Besichtigung
+
+__Example:__
+```TeX
+\documentclass[a4paper, 12pt]{article}
+\usepackage[besichtigung]{rauhenstein}
+\planungsdatum{28.11.2013}			%required
+\ort{auf der Wiese}					%required
+\durchfuehrungsdatum{28.11.2013}	%optional
+\schreiber{David}					%optional
+\planende{Jakob, Lisi}				%optional
+\planungsort{Jakobs Hood}			%optional
+\begin{document}
+\rauhenstein
+```
+
+### Kurzes Protokoll
+
+__Example:__
+```TeX
+\documentclass[a4paper, 12pt]{article}
+\usepackage[kurzesprotokoll]{rauhenstein}
+\planungsdatum{28.11.2013}			%required
+\ort{im Heim}						%required
+\durchfuehrungsdatum{28.11.2013}	%optional
+\schreiber{David}					%optional
+\planende{Jakob, Lisi}				%optional
+\planungsort{Jakobs Hood}			%optional
+\begin{document}
+\rauhenstein
+```
+
 ##Installation
 
 Creating a local package repository :
