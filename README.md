@@ -4,7 +4,9 @@ This project is a style file for latex that helps to create beautiful plannings 
 
 ##Usage
 
-There are 3 possible style for the startpage of a new document:
+You have to compile the pages from LaTeX -> PS -> PDF to get the eps working!
+
+There are 3 possible styles for the startpage of a new document:
 
 ### Planung
 
