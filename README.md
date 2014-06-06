@@ -5,7 +5,7 @@ This project is a style file for latex that helps to create beautiful plannings 
 ##Installation
 
 Creating a local package repository :
-![Creating a local package repository][./create_local_repo.png]
+![Creating a local package repository][https://raw.githubusercontent.com/theShmoo/Rauhenstein/master/create_local_repo.png]
 
 Press Add and add a folder that has the following folder structure:
 * Local Tex Files
